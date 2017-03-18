@@ -1,0 +1,50 @@
+{
+  "name": "filter-table",
+  "version": "0.0.1",
+  "description": "Filterable, sortable table that implements an infinite list to handle large amounts of data",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node ./config/server.ts"
+  },
+  "author": "Erik N.",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/enzyme": "^2.7.1",
+    "@types/jsdom": "^2.0.29",
+    "@types/mocha": "^2.2.38",
+    "@types/node": "^7.0.0",
+    "@types/react": "^15.0.16",
+    "@types/react-dom": "^0.14.20",
+    "@types/react-hot-loader": "^3.0.0",
+    "@types/sinon": "^1.16.34",
+    "@types/webpack": "^2.2.2",
+    "@types/webpack-dev-server": "^1.12.6",
+    "@types/webpack-env": "^1.13.0",
+    "autoprefixer": "^6.6.1",
+    "awesome-typescript-loader": "^3.0.0-beta.18",
+    "chai": "^3.5.0",
+    "css-loader": "^0.27.2",
+    "enzyme": "^2.7.0",
+    "jsdom": "^9.9.1",
+    "mocha": "^3.2.0",
+    "node-sass": "^4.3.0",
+    "postcss-loader": "^1.2.2",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-hot-loader": "v3.0.0-beta.6",
+    "sass-loader": "^6.0.3",
+    "sinon": "^1.17.7",
+    "style-loader": "^0.13.1",
+    "ts-node": "^2.0.0",
+    "tslint": "^4.3.1",
+    "tslint-react": "^2.3.0",
+    "typescript-require": "^0.2.9-1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "react-infinite": "^0.10.0"
+  }
+}
