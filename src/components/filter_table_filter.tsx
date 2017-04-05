@@ -1,6 +1,6 @@
-import { debounce } from 'lodash';
-import TextField from 'material-ui/TextField';
 import * as React from 'react';
+
+import { debounce } from '../utils';
 
 export interface IFilterProps {
   filterAny: boolean;
@@ -16,6 +16,9 @@ export interface IFilterState {
  * @extends {Component}
  */
 class Filter extends React.Component<IFilterProps, IFilterState> {
+
+  private hintAny: string = 'matching any filter';
+  private hintAll: string = 'matching all filters';
 
   private updateFilter: (filterValue: string) => void;
 
@@ -33,7 +36,7 @@ class Filter extends React.Component<IFilterProps, IFilterState> {
     };
     this.handleChange = this.handleChange.bind(this);
     if (props.updateFilter) {
-      this.updateFilter = debounce(props.updateFilter, 150);
+      this.updateFilter = debounce(props.updateFilter, 250);
     }
   }
 
@@ -55,17 +58,14 @@ class Filter extends React.Component<IFilterProps, IFilterState> {
   }
 
   public render(): JSX.Element {
-    const hintAny = 'matching any filter';
-    const hintAll = 'matching all filters';
-    const hintText = this.props.filterAny ? hintAny : hintAll;
+    const hintText = this.props.filterAny ? this.hintAny : this.hintAll;
     return (
-      <TextField
+      <input
         id="filter_table__filter-field"
         style={{ width: '100%' }}
-        hintStyle={{ color: '#999', fontStyle: 'italic' }}
-        hintText={`Enter comma separated filters - ${hintText}`}
-        value={this.state.filterValue}
+        placeholder={`Enter comma separated filters - ${hintText}`}
         onChange={this.handleChange}
+        value={this.state.filterValue}
       />
     );
   }

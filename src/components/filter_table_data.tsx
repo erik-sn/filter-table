@@ -8,7 +8,8 @@ export interface ITableDataProps {
   finalTableData: Array<IDictionary<string>>;
   handleRowClick?: (row: any, column: number) => void;
   config: IConfig[];
-  height?: number;
+  rowHeight?: number;
+  tableHeight?: number;
 }
 
 /**
@@ -40,15 +41,13 @@ class TableData extends React.Component<ITableDataProps, {}> {
 
   public render(): JSX.Element {
     return (
-      <div className="filter_table__row-container">
-        <Infinite
-          className="filter-table-body"
-          containerHeight={this.props.height || window.innerHeight - 300}
-          elementHeight={22}
-        >
-          {this.generateRows(this.props.handleRowClick)}
-        </Infinite>
-      </div>
+      <Infinite
+        className="filter_table__body"
+        containerHeight={this.props.tableHeight || window.innerHeight - 300}
+        elementHeight={this.props.rowHeight}
+      >
+        {this.generateRows(this.props.handleRowClick)}
+      </Infinite>
     );
   }
 }

@@ -1,9 +1,9 @@
-import * as moment from 'moment';
+// tslint:disable:jsx-no-multiline-js
+// tslint:disable:jsx-wrap-multiline
 import * as React from 'react';
 
-import { IFilterTableProps, IFilterTableState, IConfig, IDictionary,
-  IFilter } from '../interfaces';
-import { isMomentParameter, isNumberParameter } from '../utils';
+import { IConfig, IDictionary, IFilter } from '../interfaces';
+import { isNumberParameter } from '../utils';
 import FilterCsv from './filter_csv';
 import TableData from './filter_table_data';
 import Filter from './filter_table_filter';
@@ -12,6 +12,30 @@ import Results from './filter_table_results';
 import TableTotal from './filter_table_total';
 import FilterToggle from './filter_toggle';
 
+
+export interface IFilterTableProps {
+  allIcon?: JSX.Element;
+  anyIcon?: JSX.Element;
+  tableData: Array<IDictionary<string>>;
+  className?: string;
+  tableHeight?: number;
+  rowHeight?: number;
+  showFilter?: boolean;
+  showCsv?: boolean;
+  showResults?: boolean;
+  showTotals?: boolean;
+  config: IConfig[];
+  handleRowClick?: (row: any, column: number) => void;
+}
+
+export interface IFilterTableState {
+  filterText: string;
+  filterAny: boolean;
+  filters: string[];
+  sortParameter: string;
+  sortDirection: number;
+  tableData: Array<IDictionary<string>>;
+}
 
 /**
  * Responsible for outputting list of immutable Maps into a filterable,
@@ -41,11 +65,11 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
     const copiedTableData = this.copyInputData(tableData);
     this.checkConfig(config);
     this.state = {
-      filterText: '',
       filterAny: true,
+      filterText: '',
       filters: [],
-      sortParameter: undefined,
       sortDirection: undefined,
+      sortParameter: undefined,
        // we pass tableData from props to state so that filters can be
        // applied to it
       tableData: this.cleanTableData(copiedTableData),
@@ -368,9 +392,6 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
     if (isNumberParameter(tableData, sortParameter)) {
       return (input: any) => Number(input);
     }
-    if (isMomentParameter(tableData, sortParameter)) {
-      return (input: any) => moment(input);
-    }
     return (input: any) => input.toLowerCase();
   }
 
@@ -424,14 +445,14 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
         break;
     }
     this.setState({
-      sortParameter: updatedSortParameter,
       sortDirection: updatedSortDirection,
+      sortParameter: updatedSortParameter,
     });
   }
 
   public render(): JSX.Element {
-    const { className, config, showFilter, showCsv, showResults,
-      showTotals, handleRowClick, height } = this.props;
+    const { anyIcon, allIcon, className, config, showFilter, showCsv, showResults,
+      showTotals, handleRowClick, rowHeight, tableHeight } = this.props;
     const { tableData, filterAny } = this.state;
     const filteredTableData = this.filterTableData(tableData);
     const sortedTableData = this.sortTableData(filteredTableData);
@@ -451,6 +472,8 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
             <FilterToggle
               filterAny={filterAny}
               handleClick={this.handleToggleMode}
+              allIcon={allIcon}
+              anyIcon={anyIcon}
             /> : undefined
           }
           {showCsv ? <FilterCsv tableData={sortedTableData} tableHeaders={config} /> : undefined}
@@ -470,7 +493,8 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
           finalTableData={sortedTableData}
           config={config}
           handleRowClick={handleRowClick}
-          height={height}
+          tableHeight={tableHeight}
+          rowHeight={rowHeight}
         />
         {showTotals ? <TableTotal tableData={sortedTableData} config={config} /> : undefined}
         {showResults ? <Results ratio={ratio} percent={percent} /> : undefined}

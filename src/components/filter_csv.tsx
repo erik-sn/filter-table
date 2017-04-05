@@ -1,7 +1,6 @@
 import * as React from 'react';
-import * as Csv from 'react-csv';
 
-console.log(Csv);
+import Csv from './csv';
 
 
 import { IDictionary } from '../interfaces';
@@ -19,11 +18,10 @@ export interface ITableCsvProps {
 const TableCsv = ({ tableData, tableHeaders }: ITableCsvProps) => (
   <div className="filter_table__csv-container">
     <Csv
-      Csv="test_file"
+      fileName="test_file"
       data={tableData}
-    >
-    DOWNLOAD
-    </Csv>
+      params={tableHeaders}
+    />
   </div>
 );
 

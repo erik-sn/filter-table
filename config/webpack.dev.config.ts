@@ -31,6 +31,7 @@ const configuration: webpack.Configuration = {
     rules: [
       {
         test: /\.scss$/,
+        include: path.join(__dirname, '../src'),
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {

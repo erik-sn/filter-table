@@ -22,24 +22,3 @@ export interface IFilter {
   filterKey?: string;
   filterValue?: string;
 }
-
-export interface IFilterTableProps {
-  tableData: Array<IDictionary<string>>;
-  className?: string;
-  height?: number;
-  showFilter?: boolean;
-  showCsv?: boolean;
-  showResults?: boolean;
-  showTotals?: boolean;
-  config: IConfig[];
-  handleRowClick?: (row: any, column: number) => void;
-}
-
-export interface IFilterTableState {
-  filterText: string;
-  filterAny: boolean;
-  filters: string[];
-  sortParameter: string;
-  sortDirection: number;
-  tableData: Array<IDictionary<string>>;
-}

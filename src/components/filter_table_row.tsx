@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IConfig, IDictionary, IRowData } from '../../../constants/interfaces';
+import { IConfig, IDictionary, IRowData } from '../interfaces';
 import Cell from './filter_table_cell';
 
 export interface IRowProps {

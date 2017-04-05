@@ -1,19 +1,5 @@
 import { IDictionary } from './interfaces';
 
-/**
- * Iterate over the input list and check whether or not all members
- * of an object are or can be parsed into moment.js objects. If any
- * value cannot be parsed return false, otherwise true.
- *
- * @param {IDictionary[]} list - list of objects to analyze
- * @param {string} parameter - the field of a map object for which each map is checked
- * @returns {boolean}
- *
- */
-export function isMomentParameter(list: Array<IDictionary<any>>, parameter: string) {
-  const isMoment: boolean = !list.some((listItem) => !moment(listItem[parameter]).isValid());
-  return isMoment;
-}
 
 /**
  * Iterate over the input list and check whether or not all members
