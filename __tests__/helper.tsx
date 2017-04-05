@@ -3,9 +3,16 @@ import * as chai from 'chai';
 import * as jsdom from 'jsdom';
 import * as  React from 'react';
 
+const URL = require('url');
+URL.createObjectURL = (): any => undefined;
+
+class Blob {
+  constructor(content: any, config: any) {}
+};
+
 class Dictionary<TValue> {
     [index: string]: TValue;
-}
+};
 
 // jsdom configuration
 declare const global: any;
@@ -16,8 +23,19 @@ global['window'] = window;
 global['window'].localStorage = storageMock();
 global['navigator'] = {userAgent: 'node.js'};
 global['HTMLElement'] = global['window'].HTMLElement;
+global['Blob'] = Blob;
+global['URL'] = URL;
 
-function storageMock(): Object {
+export function addMSBlob(): any {
+  global['navigator']['msSaveBlob'] = (blob: any): void => undefined;
+}
+
+export function removeMSBlob(): any {
+  global['navigator']['msSaveBlob'] = undefined;
+}
+
+
+function storageMock(): {} {
   const storage = new Dictionary();
 
   return {
@@ -39,3 +57,5 @@ function storageMock(): Object {
     },
   };
 }
+
+

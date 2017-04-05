@@ -3,8 +3,8 @@ import { ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import * as sinon from 'sinon';
 
-import FilterCsv, { ITableCsvProps, ITableHeader } from '../src/components/filter_csv';
-import { IDictionary } from '../src/interfaces';
+import FilterCsv, { ITableCsvProps } from '../src/components/filter_csv';
+import { IConfig, IDictionary } from '../src/interfaces';
 
 const tableData: Array<IDictionary<any>> = [
   { name: 'one', test: '1'},
@@ -13,9 +13,9 @@ const tableData: Array<IDictionary<any>> = [
   { name: 'four', test: '4'},
 ];
 
-const tableHeaders: ITableHeader[] = [
-  { header: 'name', label: 'Name'},
-  { header: 'test', label: 'Test'},
+const tableHeaders: IConfig[] = [
+  { header: 'name', label: 'Name', width: '20%' },
+  { header: 'test', label: 'Test', width: '20%' },
 ];
 
 describe('filter_csv.test.tsx |', () => {

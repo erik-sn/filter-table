@@ -1,19 +1,15 @@
 import * as React from 'react';
 
-import { IDictionary } from '../interfaces';
-
-interface IParam {
-  header: string;
-  label: string;
-}
+import { IConfig, IDictionary } from '../interfaces';
 
 export interface ICsvGeneratorProps {
   customClass?: string;
   customStyle?: any;
   data: Array<IDictionary<any>>;
-  params: IParam[];
+  params: IConfig[];
   fileName: string;
 }
+
 
 class CsvGenerator extends React.Component<ICsvGeneratorProps, {}> {
 
@@ -44,14 +40,12 @@ class CsvGenerator extends React.Component<ICsvGeneratorProps, {}> {
       navigator.msSaveBlob(blob, `${fileName}.csv`);
     } else {
       const link = document.createElement('a');
-      if (link.download !== undefined) { // feature detection
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', `${fileName}.csv`);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-      }
+      const url: any = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `${fileName}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
     }
   }
 
@@ -70,7 +64,9 @@ class CsvGenerator extends React.Component<ICsvGeneratorProps, {}> {
    * @param  {object} params table parameters
    * @return  {string} content
    */
-  public generateContent(rowData: Array<IDictionary<string>>, header: string[], params: IParam[]): string {
+  public generateContent(rowData: Array<IDictionary<string>>,
+                         header: string[],
+                         params: IConfig[]): string {
     let content = '';
     // make a single header row
     if (header && header.length > 0) {

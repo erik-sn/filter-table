@@ -3,16 +3,12 @@ import * as React from 'react';
 import Csv from './csv';
 
 
-import { IDictionary } from '../interfaces';
+import { IConfig, IDictionary } from '../interfaces';
 
-export interface ITableHeader {
-  header: string;
-  label: string;
-}
 
 export interface ITableCsvProps {
   tableData: Array<IDictionary<any>>;
-  tableHeaders: ITableHeader[];
+  tableHeaders: IConfig[];
 }
 
 const TableCsv = ({ tableData, tableHeaders }: ITableCsvProps) => (
