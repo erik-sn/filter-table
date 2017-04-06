@@ -6,7 +6,22 @@
 A react component that takes in an array of JavaScript objects, a configuration object and converts it to a filterable, sortable table.
 
 
-## Features
+### Installation
+
+```bash
+yarn add filter-table
+```
+
+
+### Running tests
+
+```bash
+git clone https://github.com/erik-sn/filter-table.git
+cd filter-table
+npm t
+```
+
+### Features
 
 - Infinite List: only rows that are currently visible to the user are displayed
 - Filterable: Table can be filtered by keywords, partial/exact matching, case sensitivity
@@ -15,7 +30,7 @@ A react component that takes in an array of JavaScript objects, a configuration 
 - Display Totals & Results: summarize table data
 - Open CSS Styling: All table components have detailed class names and ids that are accessible for customized styling
 
-## Props
+### Props
 
 ```JavaScript
 /**
@@ -27,7 +42,7 @@ Raw table data. Array of object literals:
   ...
 ]
 */
-tableData: <Array<IDictionary<string>>;
+tableData: object[];
 
 
 /**
