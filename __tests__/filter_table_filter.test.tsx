@@ -6,7 +6,6 @@ import * as sinon from 'sinon';
 import Filter, { IFilterProps } from '../src/components/filter_table_filter';
 import { IDictionary } from '../src/interfaces';
 
-
 describe('filter_table_filter.test.tsx |', () => {
   describe('filterAny === true', () => {
     let component: ShallowWrapper<{}, {}>;
@@ -34,10 +33,10 @@ describe('filter_table_filter.test.tsx |', () => {
     it('calls updateFilter on text field change', () => {
       const prevent: sinon.SinonSpy = sinon.spy();
       const event: any = {
-        preventDefault: prevent,
         currentTarget: {
           value: 'test',
         },
+        preventDefault: prevent,
       };
       component.find('input').simulate('change', event);
       expect(prevent.callCount).to.equal(1);
@@ -68,7 +67,6 @@ describe('filter_table_filter.test.tsx |', () => {
     });
   });
 
-
   describe('updateFilter undefined', () => {
     let component: ShallowWrapper<{}, {}>;
     const props: IFilterProps = {
@@ -83,10 +81,10 @@ describe('filter_table_filter.test.tsx |', () => {
     it('does not error if updateFilter is not defined', () => {
       const prevent: sinon.SinonSpy = sinon.spy();
       const event: any = {
-        preventDefault: prevent,
         currentTarget: {
           value: 'test',
         },
+        preventDefault: prevent,
       };
       component.find('input').simulate('change', event);
     });

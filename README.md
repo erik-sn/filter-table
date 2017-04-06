@@ -1,30 +1,79 @@
-# React/Redux Boilerplate
-[![Build Status](https://travis-ci.org/erik-sn/webapp.svg?branch=master)](https://travis-ci.org/erik-sn/webapp)
-[![codecov](https://codecov.io/gh/erik-sn/webapp/branch/master/graph/badge.svg)](https://codecov.io/gh/erik-sn/webapp)
+# Filter-Table
+
+A react component that takes in an array of JavaScript objects, a configuration object and converts it to a filterable, sortable table.
 
 
-React/Redux boilerplate that includes the (optional) use of TypeScript
+## Features
 
-###Features
-- [React.js](https://facebook.github.io/react/)
-- [Redux](https://github.com/reactjs/redux)
-- [TypeScript](https://www.typescriptlang.org/index.html)
-- [Webpack](https://webpack.github.io/)
-- [React Router](https://github.com/reactjs/react-router)
-- [Hot Reloading](https://github.com/gaearon/react-hot-loader)
-- [Isomorphic/Server Side Rendering](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)
-- [Mocha/Chai/Enzyme/Sinon/Istanbul Testing](https://mochajs.org/)
-- [SASS](http://sass-lang.com/)
-- [TSLint/TSLint-React](https://palantir.github.io/tslint/)
+- Infinite List: only rows that are currently visible to the user are displayed
+- Filterable: Table can be filtered by keywords, partial/exact matching, case sensitivity
+- Sortable: toggle sorting by column
+- Download Data: user can download the table data as a .csv file
+- Display Totals & Results: summarize table data
+- Open CSS Styling: All table components have detailed class names and ids that are accessible for customized styling
+
+## Props
+
+```JavaScript
+/**
+Raw table data. Array of object literals:
+[
+  { column1: 'one', column2: 1, column3: 'A' },
+  { column1: 'two', column2: 2, column3: 'B' },
+  { column1: 'three', column2: 3, column3: 'C' },
+  ...
+]
+*/
+tableData: <Array<IDictionary<string>>;
 
 
-### NPM Scripts
-- <b>dev</b>: start the development server which runs by default on port 3000 and has hot reloading
-- <b>test</b>: Run all tests inside the __tests__ directory
-- <b>tdd</b>: Run test in watch mode, after every save the tests are re-run (test driven design)
-- <b>cover</b>: Run test and generate a coverage report indicating which code was executed while tests were ran. HTML report
-is added to the `/app/coverage` directory
-- <b>lint</b>: run tslint on the project to fix minor issues and alert more important ones
-- <b>build</b>: run the webpack build configuration to compile TypeScript/ES6 into ES5 javascript in the /dist directory
-- <b>start</b>: start the production server which hosts the minified/uglified versions of javascript/css files and supports
-server side rendering with React Router & Redux. Designed for use in production, runs by default on port 4000.
+/**
+Array of objects, where each item is a configurion for a column:
+[
+  {
+    header: string  // label that will show in the header row
+    key: string  // the object literal key that this column is responsible for
+    width: string  // either percent or px width of this column (i.e '15%', '30px')
+    transform: (columnValues: [key: string]: string[], key: string) => any
+  },
+  ...
+]
+
+the transform function accepts an object where each key is a column configuration key and columnValues contains all values from that column.
+
+Example transform function to sum a column:
+  const sum = (total: number, value: string) =>  total + Number(value.replace(/,/g, ''));
+  const transform = (columnValues, key) => columnValues[key].reduce(sum, 0);
+
+Example columnValues:
+  {
+    column1: ['one', 'two', 'three'],
+    column2: ['1', '2', '3'],
+    column3: ['A', 'B', 'C'],
+  }
+
+Note that all values have been converted to strings - your transform function should take this into account.
+*/
+config: IConfig[];
+
+className?: string;  // class that will be applied to top level
+
+rowHeight: number;  // the height of each row
+
+tableHeight?: number;  // if this is not specified the entire window is used
+
+// returns the object that the clicked on row contains as well as the column key
+handleRowClick?: (rowData: {}, key: string) => void;
+
+allIcon?: JSX.Element;  // element to show if filtering is in "all" mode
+
+anyIcon?: JSX.Element;  // element to show if filtering is in "any" mode
+
+showFilter?: boolean;  // display the filter input field
+
+showCsv?: boolean;  // display the download button that downloads table data
+
+showResults?: boolean;  // display table summary
+
+showTotals?: boolean;  // show column totals (i.e. results of transform functions)
+```

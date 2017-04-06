@@ -11,7 +11,6 @@ import Total from '../src/components/filter_table_total';
 import FilterToggle from '../src/components/filter_toggle';
 import { IConfig, IDictionary } from '../src/interfaces';
 
-
 describe('filter_table.test.tsx |', () => {
   const tableData: Array<IDictionary<any>> = [
     { name: 'one', value: '1', date: '2017-01-16' },
@@ -29,19 +28,19 @@ describe('filter_table.test.tsx |', () => {
   const config: IConfig[] = [
     {
       header: 'Name',
-      label: 'name',
+      key: 'name',
       transform: undefined,
       width: '200px',
     },
     {
       header: 'Value',
-      label: 'value',
+      key: 'value',
       transform: undefined,
       width: '200px',
     },
     {
       header: 'date',
-      label: 'date',
+      key: 'date',
       transform: undefined,
       width: '400px',
     },
@@ -52,6 +51,7 @@ describe('filter_table.test.tsx |', () => {
     const props: IFilterTableProps = {
       className: 'test_class',
       handleRowClick: undefined,
+      rowHeight: 20,
       showCsv: true,
       showFilter: true,
       showResults: true,
@@ -92,6 +92,7 @@ describe('filter_table.test.tsx |', () => {
       instance.handleFilterUpdate('name="three", "one", z, \'u\', test=missing, value=7');
 
       const finalState: any = component.state();
+      // tslint:disable-next-line:quotemark
       expect(finalState.filters).to.deep.equal(['name="three"', '"one"', 'z', "'u'", 'test=missing', 'value=7']);
 
       const tableProps: any = component.find('TableData').props();
@@ -151,11 +152,12 @@ describe('filter_table.test.tsx |', () => {
     let handleRowClick: sinon.SinonSpy;
     const props: IFilterTableProps = {
       className: '',
-      showFilter: false,
+      handleRowClick: undefined,
+      rowHeight: 20,
       showCsv: false,
+      showFilter: false,
       showResults: false,
       showTotals: false,
-      handleRowClick: undefined,
       tableData,
       config,
     };
@@ -183,28 +185,28 @@ describe('filter_table.test.tsx |', () => {
   describe('Invalid Configuration', () => {
     const props: any = {
       className: '',
-      showFilter: false,
-      showCsv: false,
-      showResults: false,
-      showTotals: false,
-      handleRowClick: undefined,
-      tableData,
       config:  [
         {
           transform: undefined,
         },
         {
-          label: 'value',
-          width: 300,
+          key: 'value',
           transform: undefined,
+          width: 300,
         },
         {
           header: 'date',
-          label: 'date',
-          width: 400,
+          key: 'date',
           transform: undefined,
+          width: 400,
         },
       ],
+      handleRowClick: undefined,
+      showCsv: false,
+      showFilter: false,
+      showResults: false,
+      showTotals: false,
+      tableData,
     };
     let component: ShallowWrapper<{}, {}>;
 
@@ -230,11 +232,12 @@ describe('filter_table.test.tsx |', () => {
     ];
     const props: IFilterTableProps = {
       className: '',
-      showFilter: false,
+      handleRowClick: undefined,
+      rowHeight: 20,
       showCsv: false,
+      showFilter: false,
       showResults: false,
       showTotals: false,
-      handleRowClick: undefined,
       tableData: numberTableData,
       config,
     };

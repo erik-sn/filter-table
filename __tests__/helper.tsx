@@ -3,6 +3,7 @@ import * as chai from 'chai';
 import * as jsdom from 'jsdom';
 import * as  React from 'react';
 
+// tslint:disable-next-line:no-var-requires
 const URL = require('url');
 URL.createObjectURL = (): any => undefined;
 
@@ -10,6 +11,7 @@ class Blob {
   constructor(content: any, config: any) {}
 };
 
+// tslint:disable-next-line:max-classes-per-file
 class Dictionary<TValue> {
     [index: string]: TValue;
 };
@@ -33,7 +35,6 @@ export function addMSBlob(): any {
 export function removeMSBlob(): any {
   global['navigator']['msSaveBlob'] = undefined;
 }
-
 
 function storageMock(): {} {
   const storage = new Dictionary();

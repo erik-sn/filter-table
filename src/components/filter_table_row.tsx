@@ -7,7 +7,7 @@ export interface IRowProps {
   config: IConfig[];
   className?: string;
   rowData: IRowData;
-  handleClick?: (rowData: IRowData, index: number) => void;
+  handleClick?: (rowData: IRowData, key: string) => void;
 }
 
 /**
@@ -31,20 +31,20 @@ class Row extends React.Component<IRowProps, {}> {
    * classes to be applied to rows and will adjust for the filter.
    *
    * @param {object} rowData - immutable Map
-   * @param {object} rowMap - immutable List, table configuration
+   * @param {object} config - immutable List, table configuration
    * @returns {object} - immutable List of JSX.Elements
    */
   public generateCells(rowData: IRowData, config: IConfig[]): JSX.Element[] {
     const classNames = rowData.classNames as IDictionary<string>;
     return config.map((option, index) => {
-      const handleCellClick = () => this.handleCellClick(index);
+      const handleCellClick = () => this.handleCellClick(option.key);
       return (
         <Cell
           key={index}
           handleClick={handleCellClick}
           width={option.width}
-          value={rowData[option.label]}
-          className={classNames ? classNames[option.label as any] : ''}
+          value={rowData[option.key]}
+          className={classNames ? classNames[option.key as any] : ''}
         />
       );
     });
@@ -59,10 +59,10 @@ class Row extends React.Component<IRowProps, {}> {
    *
    * @memberOf Row
    */
-  public handleCellClick(columnIndex: number) {
+  public handleCellClick(key: string) {
     const { handleClick } = this.props;
     if (handleClick) {
-      handleClick(this.props.rowData, columnIndex);
+      handleClick(this.props.rowData, key);
     }
   }
 

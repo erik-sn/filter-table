@@ -6,7 +6,7 @@ import Row from './filter_table_row';
 
 export interface ITableDataProps {
   finalTableData: Array<IDictionary<string>>;
-  handleRowClick?: (row: any, column: number) => void;
+  handleRowClick?: (row: any, key: string) => void;
   config: IConfig[];
   rowHeight?: number;
   tableHeight?: number;
@@ -32,7 +32,7 @@ class TableData extends React.Component<ITableDataProps, {}> {
    *
    * @memberOf TableData
    */
-  public generateRows(handleRowClick: (row: any, column: number) => void): JSX.Element[] {
+  public generateRows(handleRowClick: (row: any, key: string) => void): JSX.Element[] {
     const { finalTableData, config } = this.props;
     return finalTableData.map((data, i) => (
       <Row key={i} rowData={data} config={config} handleClick={handleRowClick} />
@@ -40,13 +40,15 @@ class TableData extends React.Component<ITableDataProps, {}> {
   }
 
   public render(): JSX.Element {
+    const { tableHeight, rowHeight, handleRowClick } = this.props;
     return (
       <Infinite
         className="filter_table__body"
-        containerHeight={this.props.tableHeight || window.innerHeight - 300}
-        elementHeight={this.props.rowHeight}
+        containerHeight={tableHeight}
+        useWindowAsScrollContainer={tableHeight ? false : true}
+        elementHeight={rowHeight}
       >
-        {this.generateRows(this.props.handleRowClick)}
+        {this.generateRows(handleRowClick)}
       </Infinite>
     );
   }

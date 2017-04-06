@@ -12,7 +12,7 @@ import Row from './filter_table_row';
  */
 function getBaseValues(config: IConfig[]): IDictionary<any> {
   return config.reduce((values: IDictionary<any>, option: IConfig) => {
-    values[option.label] = [];
+    values[option.key] = [];
     return values;
   }, {});
 }
@@ -47,14 +47,15 @@ function updateValues(baseValues: IDictionary<any>, row: IDictionary<string>) {
  * @param {object} config - table configuration object
  * @returns
  */
-function getRowValues(tableData: Array<IDictionary<string>>, config: IConfig[]): IDictionary<any> {
+function getColumnValues(tableData: Array<IDictionary<string>>,
+                         config: IConfig[]): IDictionary<any> {
   return tableData.reduce((values, row) => (
     updateValues(values, row)), getBaseValues(config),
   );
 }
 
 /**
- * A transform is a function that takes in the generated rowValues
+ * A transform is a function that takes in the generated columnValues
  * (column data) and the column label and returns a value that is
  * representative of the total of that column. This abstraction provides
  * an interface for the developer to define sum, averaging, or any other
@@ -66,11 +67,11 @@ function getRowValues(tableData: Array<IDictionary<string>>, config: IConfig[]):
  * specified return an empty string.
  *
  * @param {IConfig} config - table configuration object
- * @param {IDictionary<any>} rowValues - column data
+ * @param {IDictionary<any>} columnValues - column data
  * @returns
  */
-function applyTransforms(config: IConfig, rowValues: IDictionary<any>) {
-  return config.transform ? config.transform(rowValues, config.label) : '';
+function applyTransforms(config: IConfig, columnValues: IDictionary<any>) {
+  return config.transform ? config.transform(columnValues, config.key) : '';
 }
 
 /**
@@ -81,10 +82,10 @@ function applyTransforms(config: IConfig, rowValues: IDictionary<any>) {
  * @returns
  */
 function getTotalData(config: IConfig[], tableData: IRowData[]) {
-  const rowValues = getRowValues(tableData, config);
+  const columnValues = getColumnValues(tableData, config);
   const initialRowData: IDictionary<string> = {};
   return config.reduce((rowData, option) => {
-    rowData[option.label as any] = applyTransforms(option, rowValues);
+    rowData[option.key as any] = applyTransforms(option, columnValues);
     return rowData;
   }, initialRowData);
 }

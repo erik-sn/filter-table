@@ -4,17 +4,14 @@ export interface IDictionary<T> {
 
 export interface IConfig {
   header: string;
-  label: string;
+  key: string;
   width: string;
-  className?: string;
-  childrenClass?: string;
-  transform?: (rowValues: IDictionary<any>, label: any) => any;
+  transform?: (columnValues: IDictionary<any>, key: string) => any;
 }
 
 export interface IRowData extends IDictionary<any> {
   classNames?: IDictionary<string>;
 }
-
 
 export interface IFilter {
   exact?: boolean;

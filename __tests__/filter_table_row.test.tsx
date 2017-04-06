@@ -7,32 +7,31 @@ import Cell from '../src/components/filter_table_cell';
 import Row, { IRowProps } from '../src/components/filter_table_row';
 import { IDictionary } from '../src/interfaces';
 
-
 describe('filter_table_row.test.tsx |', () => {
   const defaultProps: IRowProps = {
+    className: 'test_class',
     config: [
       {
         header: 'Name',
-        label: 'name',
-        width: '200px',
+        key: 'name',
         transform: undefined,
+        width: '200px',
       },
       {
         header: 'Value',
-        label: 'value',
-        width: '300px',
+        key: 'value',
         transform: undefined,
+        width: '300px',
       },
     ],
+    handleClick: undefined,
     rowData: {
-      name: 'one',
-      value: '1',
       classNames: {
         name: 'test_class',
       },
+      name: 'one',
+      value: '1',
     },
-    className: 'test_class',
-    handleClick: undefined,
   };
 
   describe('default props', () => {
@@ -67,22 +66,22 @@ describe('filter_table_row.test.tsx |', () => {
       config: [
         {
           header: 'Name',
-          label: 'name',
-          width: '200px',
+          key: 'name',
           transform: undefined,
+          width: '200px',
         },
         {
           header: 'Value',
-          label: 'value',
-          width: '300px',
+          key: 'value',
           transform: undefined,
+          width: '300px',
         },
       ],
+      handleClick: undefined,
       rowData: {
         name: 'one',
         value: '1',
       },
-      handleClick: undefined,
     };
 
     beforeEach(() => {

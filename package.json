@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node ./config/server.ts",
-    "test": "mocha --compilers ts:ts-node/register,tsx:ts-node/register --require ./__tests__/helper.tsx --recursive ./__tests__/csv.test.tsx",
+    "test": "mocha --compilers ts:ts-node/register,tsx:ts-node/register --require ./__tests__/helper.tsx --recursive ./__tests__",
     "tdd": "npm run test -- --watch",
     "cover": "istanbul cover -x **/__tests__/** -e .tsx node_modules/mocha/bin/_mocha -- --compilers ts:ts-node/register,tsx:ts-node/register --require ./__tests__/helper.tsx --recursive ./__tests__/"
   },

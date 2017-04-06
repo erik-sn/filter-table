@@ -14,8 +14,8 @@ const tableData: Array<IDictionary<any>> = [
 ];
 
 const tableHeaders: IConfig[] = [
-  { header: 'name', label: 'Name', width: '20%' },
-  { header: 'test', label: 'Test', width: '20%' },
+  { header: 'name', key: 'Name', width: '20%' },
+  { header: 'test', key: 'Test', width: '20%' },
 ];
 
 describe('filter_csv.test.tsx |', () => {

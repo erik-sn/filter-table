@@ -35,17 +35,17 @@ class HeaderColumn extends React.Component<IHeaderColumnProps, {}> {
 
   public render(): JSX.Element {
     const { option, sortParameter, handleClick } = this.props;
-    const { width, header, label, childrenClass } = option;
-    const handleHeaderClick = () => handleClick(label);
+    const { width, header, key } = option;
+    const handleHeaderClick = () => handleClick(key);
     return (
       <div
-        style={label === sortParameter ? { fontWeight: 'bold', width } : { width }}
+        style={key === sortParameter ? { fontWeight: 'bold', width } : { width }}
         onClick={handleHeaderClick}
-        className={`filter_table__header-cell ${childrenClass || ''}`.trim()}
+        className="filter_table__header-cell"
       >
         <span className="filter_table__header-cell-label">{header}</span>
         <span className="filter_table__header-cell-icon">
-          {this.generateSortIcon(label)}
+          {this.generateSortIcon(key)}
         </span>
       </div>
     );

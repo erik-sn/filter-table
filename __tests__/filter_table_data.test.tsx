@@ -5,23 +5,21 @@ import * as sinon from 'sinon';
 
 import TableData, { ITableDataProps } from '../src/components/filter_table_data';
 
-
 describe('filter_table_data.test.tsx |', () => {
   let handleRowClick: sinon.SinonSpy;
   const props: ITableDataProps = {
-    handleRowClick: undefined,
     config: [
       {
         header: 'Name',
-        label: 'name',
-        width: '200px',
+        key: 'name',
         transform: undefined,
+        width: '200px',
       },
       {
         header: 'Value',
-        label: 'value',
-        width: '300px',
+        key: 'value',
         transform: undefined,
+        width: '300px',
       },
     ],
     finalTableData: [
@@ -42,6 +40,7 @@ describe('filter_table_data.test.tsx |', () => {
         value: '4',
         },
     ],
+    handleRowClick: undefined,
   };
   let component: ShallowWrapper<{}, {}>;
   beforeEach(() => {

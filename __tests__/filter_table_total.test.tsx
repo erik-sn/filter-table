@@ -6,34 +6,41 @@ import * as sinon from 'sinon';
 import TableTotal, { ITotalProps } from '../src/components/filter_table_total';
 import { IDictionary } from '../src/interfaces';
 
-
 describe('filter_table_row.test.tsx |', () => {
-  const sum = (total: number, value: string) => total + Number(value.replace(/,/g, ''));
-  const transform = (rowValues: IDictionary<any>, label: string) => (
-    rowValues[label].reduce(sum, 0)
-  );
+  const sum = (total: number, value: string) =>  total + Number(value.replace(/,/g, ''));
+  const transform = (columnValues: IDictionary<any>, key: string) => {
+    return columnValues[key].reduce(sum, 0);
+  };
   const props: ITotalProps = {
     config: [
       {
         header: 'Name',
-        label: 'name',
-        width: '200px',
+        key: 'name',
         transform: undefined,
+        width: '200px',
+      },
+      {
+        header: 'Name',
+        key: 'test',
+        transform: undefined,
+        width: '200px',
       },
       {
         header: 'Value',
-        label: 'value',
-        width: '300px',
+        key: 'value',
         transform,
+        width: '300px',
       },
     ],
     tableData: [
         {
         name: 'one',
+        test: '22',
         value: '1',
         },
         {
         name: 'two',
+        test: '23',
         value: '2',
         },
     ],

@@ -6,7 +6,6 @@ import * as sinon from 'sinon';
 import Results, { IResultsProps } from '../src/components/filter_table_results';
 import { IDictionary } from '../src/interfaces';
 
-
 describe('filter_table_cell.test.tsx |', () => {
   let component: ShallowWrapper<{}, {}>;
   const props: IResultsProps = {

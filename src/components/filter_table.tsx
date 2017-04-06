@@ -12,20 +12,19 @@ import Results from './filter_table_results';
 import TableTotal from './filter_table_total';
 import FilterToggle from './filter_toggle';
 
-
 export interface IFilterTableProps {
   allIcon?: JSX.Element;
   anyIcon?: JSX.Element;
   tableData: Array<IDictionary<string>>;
   className?: string;
   tableHeight?: number;
-  rowHeight?: number;
+  rowHeight: number;
   showFilter?: boolean;
   showCsv?: boolean;
   showResults?: boolean;
   showTotals?: boolean;
   config: IConfig[];
-  handleRowClick?: (row: any, column: number) => void;
+  handleRowClick?: (rowData: any, key: string) => void;
 }
 
 export interface IFilterTableState {
@@ -63,6 +62,7 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
     const { tableData, config } = props;
     // create a copy of the input data to work on
     const copiedTableData = this.copyInputData(tableData);
+    this.checkProps();
     this.checkConfig(config);
     this.state = {
       filterAny: true,
@@ -113,12 +113,24 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
     return tableData.map((row) => Object.assign({}, row));
   }
 
+  public checkProps(): void {
+    if (!this.props.tableData) {
+      throw TypeError('tableData is a required property');
+    }
+    if (!this.props.config) {
+      throw TypeError('config is a required property');
+    }
+    if (!this.props.rowHeight) {
+      throw TypeError('rowHeight is a required property');
+    }
+  }
+
   /**
    * Check for any missing parameters on the table configuration object. Required
    * parameters include:
    *
    * - header - the header displayed on the table to the user
-   * - label - the key of a data object
+   * - key - the key of a data object
    * - width - a percent or px string set on the table column as a width
    *
    * Optional parameters:
@@ -132,7 +144,7 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
    */
   public checkConfig(config: IConfig[]): void {
     config.forEach((option, i) => {
-      ['header', 'label', 'width'].forEach((param) => {
+      ['header', 'key', 'width'].forEach((param) => {
         if (!option.hasOwnProperty(param)) {
           throw TypeError(`Invalid table configuration object. Configuration option at index ${i} 
                            is invalid. Missing parameter: ${param}`);
@@ -208,7 +220,7 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
     const option = config.find((configOption) => (
       configOption.header.toLowerCase() === filterKey.toLowerCase()
     ));
-    return option ? option.label : undefined;
+    return option ? option.key : undefined;
   }
 
   /**

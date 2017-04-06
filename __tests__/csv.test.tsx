@@ -23,19 +23,19 @@ const tableData: Array<IDictionary<any>> = [
 const config: IConfig[] = [
   {
     header: 'Name',
-    label: 'name',
+    key: 'name',
     transform: undefined,
     width: '200px',
   },
   {
     header: 'Value',
-    label: 'value',
+    key: 'value',
     transform: undefined,
     width: '200px',
   },
   {
     header: 'date',
-    label: 'date',
+    key: 'date',
     transform: undefined,
     width: '400px',
   },

@@ -77,7 +77,7 @@ class CsvGenerator extends React.Component<ICsvGeneratorProps, {}> {
     // iterate over data array - each object is a row, each property is a column
     for (const obj of rowData) {
       for (const param of params) {
-        const label = param.label;
+        const label = param.key;
         // remove all commas in values to .csv file does not get corrupted
         content += `${obj[label] !== undefined ? this.stripCommas(obj[label]) : ''},`;
       }

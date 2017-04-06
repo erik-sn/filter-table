@@ -6,15 +6,14 @@ import * as sinon from 'sinon';
 import Cell, { ICellProps } from '../src/components/filter_table_cell';
 import { IDictionary } from '../src/interfaces';
 
-
 describe('filter_table_cell.test.tsx |', () => {
   let component: ShallowWrapper<{}, {}>;
   let handleClick: sinon.SinonSpy;
   const props: ICellProps = {
-    width: '200px',
-    value: 'testval',
     className: 'test_class',
     handleClick: undefined,
+    value: 'testval',
+    width: '200px',
   };
 
   beforeEach(() => {

@@ -6,7 +6,6 @@ import * as sinon from 'sinon';
 import Header, { IHeaderColumnProps } from '../src/components/filter_table_header_column';
 import { IDictionary } from '../src/interfaces';
 
-
 describe('filter_table_header_column.test.tsx |', () => {
   describe('label !== sortParameter', () => {
     let component: ShallowWrapper<{}, {}>;
@@ -15,7 +14,7 @@ describe('filter_table_header_column.test.tsx |', () => {
       handleClick: undefined,
       option: {
         header: 'name',
-        label: 'Name',
+        key: 'Name',
         transform: undefined,
         width: '200px',
       },
@@ -53,7 +52,7 @@ describe('filter_table_header_column.test.tsx |', () => {
       handleClick: undefined,
       option: {
         header: 'name',
-        label: 'Name',
+        key: 'Name',
         transform: undefined,
         width: '200px',
       },
@@ -81,7 +80,7 @@ describe('filter_table_header_column.test.tsx |', () => {
       handleClick: undefined,
       option: {
         header: 'name',
-        label: 'Name',
+        key: 'Name',
         transform: undefined,
         width: '200px',
       },
@@ -97,32 +96,6 @@ describe('filter_table_header_column.test.tsx |', () => {
     it('has down icon', () => {
       const container = component.find('.filter_table__header-cell-icon');
       expect(container.find('nav').length).to.equal(1);
-    });
-  });
-
-  describe('childrenClass defined', () => {
-    let component: ShallowWrapper<{}, {}>;
-    let handleClick: sinon.SinonSpy;
-    const props: IHeaderColumnProps = {
-      handleClick: undefined,
-      option: {
-        childrenClass: 'test_class',
-        header: 'name',
-        label: 'Name',
-        transform: undefined,
-        width: '200px',
-      },
-      sortDirection: -1,
-      sortParameter: 'Name',
-    };
-
-    beforeEach(() => {
-      handleClick = sinon.spy();
-      component = shallow(<Header {...props} handleClick={handleClick} />);
-    });
-
-    it('children class was passed to containers className', () => {
-      expect(component.find('.test_class').length).to.equal(1);
     });
   });
 });
