@@ -60,10 +60,11 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
   constructor(props: IFilterTableProps) {
     super(props);
     const { tableData, config } = props;
-    // create a copy of the input data to work on
-    const copiedTableData = this.copyInputData(tableData);
     this.checkProps();
     this.checkConfig(config);
+
+    // create a copy of the input data to work on
+    const copiedTableData = this.copyInputData(tableData);
     this.state = {
       filterAny: true,
       filterText: '',
@@ -146,8 +147,8 @@ class FilterTable extends React.Component<IFilterTableProps, IFilterTableState> 
     config.forEach((option, i) => {
       ['header', 'key', 'width'].forEach((param) => {
         if (!option.hasOwnProperty(param)) {
-          throw TypeError(`Invalid table configuration object. Configuration option at index ${i} 
-                           is invalid. Missing parameter: ${param}`);
+          // tslint:disable-next-line:max-line-length
+          throw TypeError(`Invalid table configuration object. Configuration option at index ${i} is invalid. Missing parameter: ${param}`);
         }
       });
     });

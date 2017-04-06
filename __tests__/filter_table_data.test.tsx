@@ -58,3 +58,54 @@ describe('filter_table_data.test.tsx |', () => {
     expect(component.find('Infinite').find('Row').length).to.equal(4);
   });
 });
+
+describe('filter_table_data.test.tsx - tableHeight specified |', () => {
+  let handleRowClick: sinon.SinonSpy;
+  const props: ITableDataProps = {
+    config: [
+      {
+        header: 'Name',
+        key: 'name',
+        transform: undefined,
+        width: '200px',
+      },
+      {
+        header: 'Value',
+        key: 'value',
+        transform: undefined,
+        width: '300px',
+      },
+    ],
+    finalTableData: [
+        {
+        name: 'one',
+        value: '1',
+        },
+        {
+        name: 'two',
+        value: '2',
+        },
+        {
+        name: 'three',
+        value: '3',
+        },
+        {
+        name: 'four',
+        value: '4',
+        },
+    ],
+    handleRowClick: undefined,
+  };
+  let component: ShallowWrapper<{}, {}>;
+
+  beforeEach(() => {
+    handleRowClick = sinon.spy();
+    component = shallow(<TableData {...props} tableHeight={250} handleRowClick={handleRowClick} />);
+  });
+
+  it('renders something & has correct containers', () => {
+    expect(component).to.exist;
+    expect(component.find('.filter_table__body').length).to.equal(1);
+  });
+
+});

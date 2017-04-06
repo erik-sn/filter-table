@@ -182,7 +182,7 @@ describe('filter_table.test.tsx |', () => {
     });
   });
 
-  describe('Invalid Configuration', () => {
+  describe('Invalid Configuration - config object', () => {
     const props: any = {
       className: '',
       config:  [
@@ -202,6 +202,7 @@ describe('filter_table.test.tsx |', () => {
         },
       ],
       handleRowClick: undefined,
+      rowHeight: 20,
       showCsv: false,
       showFilter: false,
       showResults: false,
@@ -210,9 +211,67 @@ describe('filter_table.test.tsx |', () => {
     };
     let component: ShallowWrapper<{}, {}>;
 
-    it('renders something & has correct containers', () => {
+    it('throws error on missing rowHeight', () => {
+      expect(() => component = shallow(<FilterTable {...props}  />)).to.throw(
+        'Invalid table configuration object. Configuration option at index 0 is invalid. Missing parameter: header',
+      );
+    });
+  });
+
+  describe('Invalid Configuration - rowHeight', () => {
+    const props: any = {
+      className: '',
+      config:  [],
+      handleRowClick: undefined,
+      showCsv: false,
+      showFilter: false,
+      showResults: false,
+      showTotals: false,
+      tableData,
+    };
+    let component: ShallowWrapper<{}, {}>;
+
+    it('throws error on missing rowHeight', () => {
       expect(() => component = shallow(<FilterTable {...props}  />)).to.throw(
         'rowHeight is a required property',
+      );
+    });
+  });
+
+  describe('Invalid Configuration - config', () => {
+    const props: any = {
+      className: '',
+      handleRowClick: undefined,
+      showCsv: false,
+      showFilter: false,
+      showResults: false,
+      showTotals: false,
+      tableData,
+    };
+    let component: ShallowWrapper<{}, {}>;
+
+    it('throws error on missing config', () => {
+      expect(() => component = shallow(<FilterTable {...props}  />)).to.throw(
+        'config is a required property',
+      );
+    });
+  });
+
+  describe('Invalid Configuration - tableData', () => {
+    const props: any = {
+      className: '',
+      config: [],
+      handleRowClick: undefined,
+      showCsv: false,
+      showFilter: false,
+      showResults: false,
+      showTotals: false,
+    };
+    let component: ShallowWrapper<{}, {}>;
+
+    it('throws error on missing tableData', () => {
+      expect(() => component = shallow(<FilterTable {...props}  />)).to.throw(
+        'tableData is a required property',
       );
     });
   });
