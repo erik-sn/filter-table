@@ -212,7 +212,7 @@ describe('filter_table.test.tsx |', () => {
 
     it('renders something & has correct containers', () => {
       expect(() => component = shallow(<FilterTable {...props}  />)).to.throw(
-        'Invalid table configuration object',
+        'rowHeight is a required property',
       );
     });
   });

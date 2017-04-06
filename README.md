@@ -28,7 +28,7 @@ tableData: <Array<IDictionary<string>>;
 
 
 /**
-Array of objects, where each item is a configurion for a column:
+Array of objects, where each item is a configuration for a column:
 [
   {
     header: string  // label that will show in the header row
@@ -39,7 +39,8 @@ Array of objects, where each item is a configurion for a column:
   ...
 ]
 
-the transform function accepts an object where each key is a column configuration key and columnValues contains all values from that column.
+The transform function accepts an object where each key is a column configuration
+key and columnValues contains all values from that column.
 
 Example transform function to sum a column:
   const sum = (total: number, value: string) =>  total + Number(value.replace(/,/g, ''));
@@ -52,7 +53,8 @@ Example columnValues:
     column3: ['A', 'B', 'C'],
   }
 
-Note that all values have been converted to strings - your transform function should take this into account.
+Note that all values have been converted to strings - your transform
+function should take this into account.
 */
 config: IConfig[];
 
@@ -77,3 +79,14 @@ showResults?: boolean;  // display table summary
 
 showTotals?: boolean;  // show column totals (i.e. results of transform functions)
 ```
+
+## CSS Classes
+
+- top level container: 'filter_table__container'
+- filter container: 'filter_table__filter-bar'
+- header container: 'filter_table__header'
+- table body: 'filter_table__body'
+- table row: 'filter_table__row'
+- table cell: 'filter_table__cell'
+- tabel column totals container: 'filter_table__totals-container'
+- table summary container: 'filter_table__results-container'
