@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/erik-sn/filter-table.svg?branch=master)](https://travis-ci.org/erik-sn/filter-table)[![codecov](https://codecov.io/gh/erik-sn/filter-table/branch/master/graph/badge.svg)](https://codecov.io/gh/erik-sn/filter-table)
+
+
 # Filter-Table
 
 A react component that takes in an array of JavaScript objects, a configuration object and converts it to a filterable, sortable table.
