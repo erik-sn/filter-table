@@ -54,10 +54,11 @@ const configuration: webpack.Configuration = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.json'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
   externals: {
-      react: 'React',
+    'react': 'commonjs react',
+    'react-dom': 'commonjs react-dom',
   },
 };
 
