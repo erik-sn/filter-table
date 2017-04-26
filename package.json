@@ -1,6 +1,6 @@
 {
   "name": "filter-table",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Filterable, sortable table that implements an infinite list to handle large amounts of data",
   "main": "dist/index.js",
   "scripts": {

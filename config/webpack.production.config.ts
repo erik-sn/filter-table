@@ -7,13 +7,14 @@ import * as webpack from 'webpack';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const configuration: webpack.Configuration = {
-  devtool: 'hidden-source-map',
+  devtool: 'source-map',
   entry: [
-    './src/components/filter_table.tsx',
+    './src/index.ts',
   ],
   output: {
     path: path.join(__dirname, '../dist'),
     filename: 'index.js',
+    libraryTarget: 'umd',
     publicPath: '/dist/',
   },
   plugins: [
@@ -33,7 +34,7 @@ const configuration: webpack.Configuration = {
         },
     }),
     new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [

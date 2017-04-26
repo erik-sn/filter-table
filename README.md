@@ -12,6 +12,13 @@ A react component that takes in an array of JavaScript objects, a configuration 
 yarn add filter-table
 ```
 
+Copy the .css file or require somewhere in your project so webpack pulls it into your bundle:
+
+```javascript
+require('filter-table/dist/index.css');
+```
+
+
 
 ### Running tests
 
@@ -46,11 +53,11 @@ tableData: object[];
 
 
 /**
-Array of objects, where each item is a configuration for a column:
+Array of object literals, where each item is a configuration for a column:
 [
   {
-    header: string  // label that will show in the header row
     key: string  // the object literal key that this column is responsible for
+    header: string  // label that will show in the header row
     width: string  // either percent or px width of this column (i.e '15%', '30px')
     transform: (columnValues: [key: string]: string[], key: string) => any
   },
@@ -74,7 +81,7 @@ Example columnValues:
 Note that all values have been converted to strings - your transform
 function should take this into account.
 */
-config: IConfig[];
+config: Config[];
 
 className?: string;  // class that will be applied to top level
 
