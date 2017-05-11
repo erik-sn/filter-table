@@ -4,17 +4,14 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 const configuration: webpack.Configuration = {
   devtool: 'source-map',
   entry: [
-    './src/index.ts',
+    './config/index.tsx',
   ],
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: 'index.js',
-    libraryTarget: 'umd',
+    filename: 'bundle.min.js',
     publicPath: '/dist/',
   },
   plugins: [
@@ -24,7 +21,7 @@ const configuration: webpack.Configuration = {
       },
     }),
     new ExtractTextPlugin({
-      filename: 'index.css',
+      filename: 'bundle.min.css',
       allChunks: true,
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -34,7 +31,6 @@ const configuration: webpack.Configuration = {
         },
     }),
     new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } }),
-    // new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [
@@ -50,16 +46,11 @@ const configuration: webpack.Configuration = {
       {
         test: /\.ts$|\.tsx$/,
         use: ['awesome-typescript-loader'],
-        include: path.join(__dirname, '../src'),
       },
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-  },
-  externals: {
-    'react': 'commonjs react',
-    'react-dom': 'commonjs react-dom',
   },
 };
 

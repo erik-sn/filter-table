@@ -28,16 +28,10 @@ for (let i = 0; i < 10; i++) {
   }
 }
 
-const rowClick = (row: any, key: string) => {
-  console.log(row);
-  console.log(key);
-};
-
 const App = () => (
   <div className="test__container" style={{ height: '600px' }}>
     <h1>Test</h1>
     <FilterTable
-      handleRowClick={rowClick}
       tableData={tableData}
       config={config}
       rowHeight={20}
